@@ -21,7 +21,7 @@ class dataProcess(object):
         self.npy_path = npy_path
 
     def label2class(self, label):
-        x = np.zeros([self.out_rows, self.out_cols, 12])
+        x = np.zeros([self.out_rows, self.out_cols, 19])
         for i in range(self.out_rows):
             for j in range(self.out_cols):
                 x[i, j, int(label[i][j])] = 1  # 属于第m类，第三维m处值为1
@@ -37,16 +37,19 @@ class dataProcess(object):
         labels1 = sorted(glob.glob(self.test_label + "/*." + self.img_type))
         labels = labels0 + labels1
         imgdatas = np.ndarray((len(imgs), self.out_rows, self.out_cols, 3), dtype=np.uint8)
-        imglabels = np.ndarray((len(labels), self.out_rows, self.out_cols, 12), dtype=np.uint8)
+        imglabels = np.ndarray((len(labels), self.out_rows, self.out_cols, 19), dtype=np.uint8)
         print(len(imgs), len(labels))
 
         for x in range(len(imgs)):
             imgpath = imgs[x]
             labelpath = labels[x]
-            img = load_img(imgpath, grayscale=False, target_size=[512, 512])
-            label = load_img(labelpath, grayscale=True, target_size=[512, 512])
+            img = load_img(imgpath, grayscale=False)
+
+            label = load_img(labelpath)
+            print('image '+labelpath+' loaded')
             img = img_to_array(img)
-            label = self.label2class(img_to_array(label))
+            a = self.decode_segmap(img_to_array(label))
+            label = self.label2class(a)
             imgdatas[i] = img
             imglabels[i] = label
             if i % 100 == 0:
@@ -68,7 +71,7 @@ class dataProcess(object):
         for imgname in imgs:
             testpath = imgname
             testpathlist.append(testpath)
-            img = load_img(testpath, grayscale=False, target_size=[512, 512])
+            img = load_img(testpath, grayscale=False)
             img = img_to_array(img)
             imgdatas[i] = img
             i += 1
@@ -101,8 +104,62 @@ class dataProcess(object):
         return imgs_test
 
 
+    def decode_segmap(self, temp, plot=False):
+        Sky = [128, 128, 128]
+        Building=[128,0,0]
+        Pole = [192, 192, 128]
+        Road = [128, 64, 128]
+        Pavement = [60, 40, 222]
+        Tree = [128, 128, 0]
+        SignSymbol = [192, 128, 128]
+        Fence = [64, 64, 128]
+        Car=[64,0,128]
+        Pedestrian = [64, 64, 0]
+        Bicyclist = [0, 128, 192]
+        Unlabelled=[0,0,0]
+        Animal=[64,128,64]
+        Archway=[192,0,128]
+        Bridge = [0,128,64]
+        CartLuggagePram=[64,0,192]
+        Child=[192,1128,64]
+        Column_Pole=[ 192 ,192,   128]
+
+        label_colours = np.array(
+            [
+                Sky,
+                Building,
+                Pole,
+                Road,
+                Pavement,
+                Tree,
+                SignSymbol,
+                Fence,
+                Car,
+                Pedestrian,
+                Bicyclist,
+                Unlabelled,
+                Bridge,
+                Animal,
+                Archway,
+                Bridge,
+                CartLuggagePram,
+                Child,
+                Column_Pole,
+
+            ]
+        )
+        a,b,c=np.shape(temp)
+        categorized = np.zeros((a,b))
+        for i in range (np.shape(temp)[0]):
+            for j in range (np.shape(temp)[1]):
+                for m in range (19):
+                    if (temp[i][j]==label_colours[m]).all():
+                        categorized[i][j]=m
+
+
+        return categorized
 
 if __name__ == "__main__":
-    mydata = dataProcess(512, 512)
+    mydata = dataProcess(720 ,960)
     mydata.create_train_data()
     mydata.create_test_data()
