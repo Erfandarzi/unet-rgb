@@ -27,8 +27,8 @@ class dataProcess(object):
             imgpath = imgs[x]
             pic_name = imgpath.split('/')[-1]
             labelpath = self.label_path + '/' + pic_name
-            img = load_img(imgpath, grayscale=False, target_size=[512, 512])
-            label = load_img(labelpath, grayscale=True, target_size=[512, 512])
+            img = load_img(imgpath, grayscale=False)
+            label = load_img(labelpath, grayscale=True)
             img = img_to_array(img)
             label = img_to_array(label)
             imgdatas[i] = img
@@ -52,7 +52,7 @@ class dataProcess(object):
         for imgname in imgs:
             testpath = imgname
             testpathlist.append(testpath)
-            img = load_img(testpath, grayscale=False, target_size=[512, 512])
+            img = load_img(testpath, grayscale=False)
             img = img_to_array(img)
             imgdatas[i] = img
             i += 1
@@ -89,6 +89,6 @@ class dataProcess(object):
 
 
 if __name__ == "__main__":
-    mydata = dataProcess(512, 512)
+    mydata = dataProcess(720, 960)
     mydata.create_train_data()
     mydata.create_test_data()
