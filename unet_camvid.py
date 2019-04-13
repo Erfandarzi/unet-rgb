@@ -9,7 +9,7 @@ from data_camvid import *
 
 
 class myUnet(object):
-    def __init__(self, img_rows=480, img_cols=360):
+    def __init__(self, img_rows=360, img_cols=480):
         self.img_rows = img_rows
         self.img_cols = img_cols
 
@@ -154,7 +154,7 @@ class myUnet(object):
                         img[k][j] = [64, 64, 0]
                     elif num == 11:
                         img[k][j] = [0, 128, 192]
-            img = cv2.resize(img, (480, 360), interpolation=cv2.INTER_CUBIC)
+            img = cv2.resize(img, (360, 480), interpolation=cv2.INTER_CUBIC)
             cv2.imwrite(path, img)
 
 
