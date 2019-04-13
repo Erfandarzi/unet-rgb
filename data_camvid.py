@@ -24,7 +24,7 @@ class dataProcess(object):
         x = np.zeros([self.out_rows, self.out_cols, 19])
         for i in range(self.out_rows):
             for j in range(self.out_cols):
-                x[i, j, int(label[i][j])] = 1  # 属于第m类，第三维m处值为1
+                x[i, j, int(label[i][j][0])] = 1  # 属于第m类，第三维m处值为1
         return x
 
     def create_train_data(self):
