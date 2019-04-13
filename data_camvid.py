@@ -40,7 +40,7 @@ class dataProcess(object):
         imglabels = np.ndarray((len(labels), self.out_rows, self.out_cols, 19), dtype=np.uint8)
         print(len(imgs), len(labels))
 
-        for x in range(len(imgs)):
+        for x in range(30):
             imgpath = imgs[x]
             labelpath = labels[x]
             img = load_img(imgpath, grayscale=False)
@@ -108,7 +108,7 @@ class dataProcess(object):
         Sky = [128, 128, 128]
         Building=[128,0,0]
         Pole = [192, 192, 128]
-        Road = [128, 64, 128]
+        Road = [128, 64,  128]
         Pavement = [60, 40, 222]
         Tree = [128, 128, 0]
         SignSymbol = [192, 128, 128]
