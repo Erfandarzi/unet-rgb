@@ -9,7 +9,7 @@ class dataProcess(object):
     def __init__(self, out_rows, out_cols, train_path="/content/segnet/CamVid/train", train_label="/content/segnet/CamVid/trainannot",
                  val_path="/content/segnet/CamVid/val", val_label="/content/segnet/CamVid/valannot",
                  test_path="/content/segnet/CamVid/test", test_label='/content/segnet/CamVid/testannot', npy_path="/content/unet-rgb/npydata", img_type="png"):
-        self.out_rows = out_rows
+         self.out_rows = out_rows
         self.out_cols = out_cols
         self.train_path = train_path
         self.train_label = train_label
@@ -57,8 +57,8 @@ class dataProcess(object):
             i += 1
 
         print('loading done')
-        np.save('/content/unet-rgb/npydata/camvid_train.npy', imgdatas)
-        np.save('/content/unet-rgb/npydata/camvid_mask_train.npy', imglabels)
+        np.save(self.npy_path + '/camvid_train.npy', imgdatas)
+        np.save(self.npy_path + '/camvid_mask_train.npy', imglabels)
         print('Saving to .npy files done.')
 
     def create_test_data(self):
@@ -81,7 +81,7 @@ class dataProcess(object):
             for i in range(len(testpathlist)):
                 f.writelines(testpathlist[i] + '\n')
         print('loading done')
-        np.save('/content/unet-rgb/npydata/camvid_test.npy', imgdatas)
+        np.save(self.npy_path + '/camvid_test.npy', imgdatas)
         print('Saving to imgs_test.npy files done.')
 
     def load_train_data(self):
