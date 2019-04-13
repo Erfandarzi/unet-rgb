@@ -57,8 +57,8 @@ class dataProcess(object):
             i += 1
 
         print('loading done')
-        np.save(self.npy_path + '/camvid_train.npy', imgdatas)
-        np.save(self.npy_path + '/camvid_mask_train.npy', imglabels)
+        np.save('/content/unet-rgb/npydata/camvid_train.npy', imgdatas)
+        np.save('content/unet-rgb/npydata/camvid_mask_train.npy', imglabels)
         print('Saving to .npy files done.')
 
     def create_test_data(self):
@@ -81,7 +81,7 @@ class dataProcess(object):
             for i in range(len(testpathlist)):
                 f.writelines(testpathlist[i] + '\n')
         print('loading done')
-        np.save(self.npy_path + '/camvid_test.npy', imgdatas)
+        np.save('content/unet-rgb/npydata/camvid_test.npy', imgdatas)
         print('Saving to imgs_test.npy files done.')
 
     def load_train_data(self):
