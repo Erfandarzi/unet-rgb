@@ -24,7 +24,7 @@ class myUnet(object):
 
         conv1 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(inputs)
         # print(conv1)
-        print ("conv1 shape:"), conv1.shape
+        print ("conv1 shape:"+ str(conv1.shape))
         conv1 = Conv2D(64, 3, activation='relu', padding='same', kernel_initializer='he_normal')(conv1)
         print ("conv1 shape:"), conv1.shape
         pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
