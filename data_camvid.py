@@ -48,8 +48,8 @@ class dataProcess(object):
             label = load_img(labelpath)
             print('image '+labelpath+' loaded')
             img = img_to_array(img)
-            a = self.decode_segmap(img_to_array(label))
-            label = self.label2class(a)
+#             a = self.decode_segmap(img_to_array(label))
+            label = self.label2class(img_to_array(label))
             imgdatas[i] = img
             imglabels[i] = label
             if i % 100 == 0:
