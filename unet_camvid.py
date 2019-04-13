@@ -9,7 +9,7 @@ from data_camvid import *
 
 
 class myUnet(object):
-    def __init__(self, img_rows=720, img_cols=960):
+    def __init__(self, img_rows=480, img_cols=360):
         self.img_rows = img_rows
         self.img_cols = img_cols
 
