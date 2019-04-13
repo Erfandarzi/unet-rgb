@@ -160,6 +160,6 @@ class dataProcess(object):
         return categorized
 
 if __name__ == "__main__":
-    mydata = dataProcess(480 ,360)
+    mydata = dataProcess(360 ,480)
     mydata.create_train_data()
     mydata.create_test_data()
