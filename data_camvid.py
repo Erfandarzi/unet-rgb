@@ -9,7 +9,7 @@ class dataProcess(object):
     def __init__(self, out_rows, out_cols, train_path="/content/segnet/CamVid/train", train_label="/content/segnet/CamVid/trainannot",
                  val_path="/content/segnet/CamVid/val", val_label="/content/segnet/CamVid/valannot",
                  test_path="/content/segnet/CamVid/test", test_label='/content/segnet/CamVid/testannot', npy_path="/content/unet-rgb/npydata", img_type="png"):
-         self.out_rows = out_rows
+        self.out_rows = out_rows
         self.out_cols = out_cols
         self.train_path = train_path
         self.train_label = train_label
